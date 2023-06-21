@@ -10,6 +10,7 @@ func _string(c *gin.Context) {
 	c.String(http.StatusOK, "Hello")
 }
 
+// 响应json数据 重点
 func _json(c *gin.Context) {
 	// json响应结构体
 	// type UserInfo struct {
@@ -35,9 +36,40 @@ func _json(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"username": "Leo Li", "age": 28})
 }
 
+// 响应xml
+func _xml(c *gin.Context) {
+	c.XML(http.StatusOK, gin.H{"username": "Leo Li", "age": 28, "hobbies": gin.H{
+		"basketball": true,
+		"football":   true,
+	}})
+}
+
+// 响应yaml
+func _yaml(c *gin.Context) {
+	c.YAML(http.StatusOK, gin.H{"username": "Leo Li", "age": 28, "hobbies": gin.H{
+		"basketball": true,
+		"football":   true,
+	}})
+}
+
+// 响应html
+func _html(c *gin.Context) {
+	c.HTML(http.StatusOK, "index.html", gin.H{"msg": "Leo Good"})
+}
+
 func main() {
 	router := gin.Default()
+	// 加载模版目录下所有的模版文件(响应html需要配置的模版)
+	router.LoadHTMLGlob("../templates/*")
+	// 静态文件响应参数: 1. 路由 2. 相对文件路径  请求示例: http://localhost/bg
+	router.StaticFile("/bg", "../static/background.jpeg")
+	// 文件响应参数: 1. 路由  2. 可访问目录的相对路径   请求示例: http://localhost/static/home.txt
+	router.StaticFS("/static", http.Dir("../static/static_real"))
+
 	router.GET("/", _string)
 	router.GET("/json", _json)
+	router.GET("/xml", _xml)
+	router.GET("/yaml", _yaml)
+	router.GET("/html", _html)
 	router.Run(":80")
 }
