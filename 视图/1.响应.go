@@ -57,7 +57,14 @@ func _html(c *gin.Context) {
 	c.HTML(http.StatusOK, "index.html", gin.H{"msg": "Leo Good"})
 }
 
-func main() {
+// 重定向
+func _redirect(c *gin.Context) {
+	// 临时重定向到对应路由
+	// c.Redirect(http.StatusFound, "https://www.baidu.com")
+	c.Redirect(http.StatusFound, "/html") 
+}
+
+func main() { 
 	router := gin.Default()
 	// 加载模版目录下所有的模版文件(响应html需要配置的模版)
 	router.LoadHTMLGlob("../templates/*")
@@ -71,5 +78,6 @@ func main() {
 	router.GET("/xml", _xml)
 	router.GET("/yaml", _yaml)
 	router.GET("/html", _html)
+	router.GET("/baidu", _redirect)
 	router.Run(":80")
 }
