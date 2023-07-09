@@ -1,8 +1,6 @@
 package main
 
 import (
-	"io"
-
 	"github.com/gin-gonic/gin"
 )
 
