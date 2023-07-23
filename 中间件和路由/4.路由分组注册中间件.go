@@ -1,6 +1,10 @@
 package main
 
 import (
+	"fmt"
+	"strconv"
+	"time"
+
 	"github.com/gin-gonic/gin"
 )
 
@@ -25,26 +29,47 @@ func UserManagerIndex(ctx *gin.Context) {
 	ctx.JSON(200, Res{0, userList, "请求成功"})
 }
 
-func Middleware(ctx *gin.Context) {
-	token := ctx.GetHeader("Authorization")
-	if token == GlabalToken {
-		ctx.Next()
-		return
+// 验证中间件(闭包写法)
+func AuthMiddleware(msg string) gin.HandlerFunc {
+	return func(ctx *gin.Context) {
+		token := ctx.GetHeader("Authorization")
+		if token == GlabalToken {
+			ctx.Next()
+			return
+		}
+		ctx.JSON(401, Res{1, nil, msg})
+		ctx.Abort()
 	}
-	ctx.JSON(401, Res{1, nil, "身份验证失败"})
-	ctx.Abort()
+}
+
+// 计算请求耗时中间件
+func TotalTimeMiddleware() gin.HandlerFunc {
+	return func(ctx *gin.Context) {
+		startTime := time.Now()
+		ctx.Next()
+		since := time.Since(startTime)
+		currentFunc := ctx.HandlerName()
+		fmt.Printf("===>函数 %s 耗时⌚️ %d ns\n", currentFunc, since)
+	}
 }
 
 func UserRouterInit(router *gin.RouterGroup) {
 	// 分组添加中间件校验
-	userManager := router.Group("user").Use(Middleware)
+	userManager := router.Group("user").Use(AuthMiddleware("身份验证失败"))
 	{
 		userManager.GET("/index", UserManagerIndex)
 	}
 }
 
 func main() {
-	router := gin.Default()
+	router := gin.New()
+
+	// 添加计算耗时中间件
+	router.Use(TotalTimeMiddleware(), gin.LoggerWithFormatter(func(params gin.LogFormatterParams) string {
+		// 修改日志格式
+		codeString := strconv.Itoa(params.StatusCode)
+		return "===>新的日志格式😄:    " + codeString + "     " + params.Path + "     " + params.Method + "    " + params.ResetColor() + "\n"
+	}), gin.Recovery())
 
 	// 路由分组
 	api := router.Group("api")
