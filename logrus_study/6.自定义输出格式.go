@@ -66,6 +66,7 @@ func (f *MyFormatter) Format(entry *logrus.Entry) ([]byte, error) {
 }
 
 func main() {
+	// 定位具体的行号位置
 	logrus.SetReportCaller(true)
 	logrus.SetLevel(logrus.DebugLevel)
 	logrus.SetFormatter(&MyFormatter{
