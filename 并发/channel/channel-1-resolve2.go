@@ -17,7 +17,11 @@ import (
 如果设置的时间过长, 又会导致主线程等待时间过长, 降低程序的执行效率
 所以使用channel来解决这个问题!!
 
-channel的本质就是一个队列, 数据是先进先出的, 通过channel可以实现多个goroutine之间的通信
+channel介绍:
+1. channel的本质就是一个队列,
+2. 数据是先进先出的
+3. 线程安全, 多goroutine访问时, 不需要加锁, 就是线程安全的
+4. channel是有类型的, 一个string的channel只能存放string类型数据
 
 视频地址:  https://www.bilibili.com/video/BV1ME411Y71o?p=272&spm_id_from=pageDriver&vd_source=e339d0ca63ebabe15afcd98b996033f7
 */
