@@ -52,3 +52,37 @@ func buildMap(num int) {
 
 	tips: channel-1.exe文件是通过运行“go build -race channel-1.go”生成的
 */
+
+// 后续复习练习代码：
+
+// var showMap map[int]int = make(map[int]int, 20)
+// var wg sync.WaitGroup
+// var lock sync.Mutex
+
+// func main() {
+// 	wg.Add(20)
+
+// 	for i := 1; i <= 20; i++ {
+// 		go storeNumToMap(i)
+// 	}
+
+// 	wg.Wait()
+
+// 	for key, val := range showMap {
+// 		fmt.Printf("key为%d, 对应的val为%d\n", key, val)
+// 	}
+// }
+
+// func factorial(num int) int {
+// 	if num == 0 || num == 1 {
+// 		return 1
+// 	}
+// 	return num * factorial(num-1)
+// }
+
+// func storeNumToMap(num int) {
+// 	defer wg.Done()
+// 	lock.Lock()
+// 	showMap[num] = factorial(num)
+// 	lock.Unlock()
+// }
