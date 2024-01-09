@@ -53,8 +53,9 @@ func buildMap(num int) {
 	tips: channel-1.exe文件是通过运行“go build -race channel-1.go”生成的
 */
 
-// 后续复习练习代码：
-
+/*
+后续复习练习代码：（没有使用管道）
+*/
 // var showMap map[int]int = make(map[int]int, 20)
 // var wg sync.WaitGroup
 // var lock sync.Mutex
@@ -85,4 +86,59 @@ func buildMap(num int) {
 // 	lock.Lock()
 // 	showMap[num] = factorial(num)
 // 	lock.Unlock()
+// }
+
+/*
+后续复习练习代码：（使用管道）
+*/
+// var showMap map[int]int = make(map[int]int, 20)
+
+// // 使用管道
+// var dataChan chan struct {
+// 	num    int
+// 	result int
+// } = make(chan struct {
+// 	num    int
+// 	result int
+// }, 20)
+
+// var wg sync.WaitGroup
+
+// func main() {
+// 	wg.Add(20)
+
+// 	for i := 1; i <= 20; i++ {
+// 		go storeNumToMap(i)
+// 	}
+
+// 	wg.Wait()
+// 	close(dataChan)
+
+// 	for i := 0; i < 20; i++ {
+// 		dataMap := <-dataChan
+// 		showMap[dataMap.num] = dataMap.result
+// 	}
+
+// 	for key, val := range showMap {
+// 		fmt.Printf("key为%d, 对应的val为%d\n", key, val)
+// 	}
+// }
+
+// func factorial(num int) int {
+// 	if num == 0 || num == 1 {
+// 		return 1
+// 	}
+// 	return num * factorial(num-1)
+// }
+
+// func storeNumToMap(num int) {
+// 	defer wg.Done()
+// 	result := factorial(num)
+// 	dataChan <- struct {
+// 		num    int
+// 		result int
+// 	}{
+// 		num,
+// 		result,
+// 	}
 // }
