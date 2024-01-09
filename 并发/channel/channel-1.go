@@ -142,3 +142,64 @@ func buildMap(num int) {
 // 		result,
 // 	}
 // }
+
+/*
+后续复习练习代码：（使用管道，但设置小容量管道）
+*/
+// var showMap map[int]int = make(map[int]int, 20)
+
+// // 使用管道
+// var dataChan chan struct {
+// 	num    int
+// 	result int
+// } = make(chan struct {
+// 	num    int
+// 	result int
+// }, 5)
+
+// var wg sync.WaitGroup
+
+// func main() {
+// 	wg.Add(20)
+
+// 	for i := 1; i <= 20; i++ {
+// 		go storeNumToMap(i)
+// 	}
+
+// 	go func() {
+// 		wg.Wait()
+// 		close(dataChan)
+// 	}()
+
+// 	// 通过不断从dataChan管道中取出数据，可以减小dataChan的容量设置
+// 	for {
+// 		dataMap, ok := <-dataChan
+// 		if !ok {
+// 			break
+// 		}
+// 		showMap[dataMap.num] = dataMap.result
+// 	}
+
+// 	for key, val := range showMap {
+// 		fmt.Printf("key为%d, 对应的val为%d\n", key, val)
+// 	}
+// }
+
+// func factorial(num int) int {
+// 	if num == 0 || num == 1 {
+// 		return 1
+// 	}
+// 	return num * factorial(num-1)
+// }
+
+// func storeNumToMap(num int) {
+// 	defer wg.Done()
+// 	result := factorial(num)
+// 	dataChan <- struct {
+// 		num    int
+// 		result int
+// 	}{
+// 		num,
+// 		result,
+// 	}
+// }
