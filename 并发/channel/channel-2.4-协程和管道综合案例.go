@@ -57,3 +57,40 @@ func readData() {
 	// 	fmt.Println(x)
 	// }
 }
+
+// 复习的练习代码
+// var intChan chan int = make(chan int, 5)
+// var exitChan chan bool = make(chan bool, 1)
+
+// func main() {
+// 	go writeData()
+// 	go readData()
+
+// 	for {
+// 		_, ok := <-exitChan
+// 		if !ok {
+// 			break
+// 		}
+// 	}
+
+// 	fmt.Println("退出主线程............")
+// }
+
+// func writeData() {
+// 	for i := 1; i <= 50; i++ {
+// 		intChan <- i
+// 	}
+// 	close(intChan)
+// }
+
+// func readData() {
+// 	for {
+// 		val, ok := <-intChan
+// 		if !ok {
+// 			break
+// 		}
+// 		fmt.Printf("读取管道中数据：%d\n", val)
+// 	}
+// 	exitChan <- true
+// 	close(exitChan)
+// }
