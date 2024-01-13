@@ -11,17 +11,17 @@ import (
 */
 
 // 生产
-func producer(sourceChan chan<- AliYunLog, wg *sync.WaitGroup) {
+func producer(sourceChan chan<- *AliYunLog, wg *sync.WaitGroup) {
 	defer wg.Done()
 
 	// 产生日志
-	produceLog := AliYunLog{
+	produceLog := &AliYunLog{
 		EndPoint:   1,
 		Message:    "日志内容123",
 		Level:      2,
 		CreateTime: time.Now().Nanosecond(),
 	}
-	produceLog2 := AliYunLog{
+	produceLog2 := &AliYunLog{
 		EndPoint:   13,
 		Message:    "Erorr Panic",
 		Level:      4,
@@ -40,7 +40,7 @@ func producer(sourceChan chan<- AliYunLog, wg *sync.WaitGroup) {
 }
 
 // 消费
-func consumer(sourceChan <-chan AliYunLog, wg *sync.WaitGroup) {
+func consumer(sourceChan <-chan *AliYunLog, wg *sync.WaitGroup) {
 	defer wg.Done()
 	for {
 		log, ok := <-sourceChan
@@ -60,7 +60,7 @@ type AliYunLog struct {
 }
 
 func main() {
-	var sourceChan chan AliYunLog = make(chan AliYunLog, 5)
+	var sourceChan chan *AliYunLog = make(chan *AliYunLog, 5)
 
 	var wg sync.WaitGroup
 
