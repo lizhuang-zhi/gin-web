@@ -3,35 +3,50 @@
 package main
 
 import (
+	"fmt"
 	"log"
-	"net/http"
 	"net/http/httputil"
 	"net/url"
+
+	"github.com/gin-gonic/gin"
 )
 
+// 服务映射
+var GatewayMap = map[string]string{
+	"activity": "http://localhost:8081",
+	"mail":     "http://localhost:8082",
+}
+
 func main() {
-	// 定义目标服务的URL
-	service1URL, _ := url.Parse("http://localhost:8081")
-	service2URL, _ := url.Parse("http://localhost:8082")
+	r := gin.Default()
 
-	// 创建两个反向代理
-	proxy1 := httputil.NewSingleHostReverseProxy(service1URL)
-	proxy2 := httputil.NewSingleHostReverseProxy(service2URL)
-
-	// 路由和处理函数
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		path := r.URL.Path
-
-		// 根据路径转发到不同服务
-		if path == "/service1" {
-			proxy1.ServeHTTP(w, r)
-		} else if path == "/service2" {
-			proxy2.ServeHTTP(w, r)
-		} else {
-			http.Error(w, "Service not found", http.StatusNotFound)
-		}
-	})
+	// 遍历服务映射，为每个服务创建反向代理
+	for service, serviceUrl := range GatewayMap {
+		relativePath := fmt.Sprintf("/%s/*proxyPath", service)
+		reverseProxy := createReverseProxy(serviceUrl)
+		r.Any(relativePath, reverseProxy)
+	}
 
 	log.Println("Gateway is running on port 8080...")
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	r.Run(":8080")
+}
+
+func createReverseProxy(target string) gin.HandlerFunc {
+	targetUrl, err := url.Parse(target)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	log.Printf("targetUrl is %s\n", targetUrl) // targetUrl is http://localhost:8081
+
+	// 创建反向代理
+	proxy := httputil.NewSingleHostReverseProxy(targetUrl)
+
+	return func(c *gin.Context) {
+		c.Request.URL.Path = c.Param("proxyPath")
+
+		log.Printf("proxyPath is %s\n", c.Param("proxyPath")) // proxyPath is /create[/update, /send, /accept]
+
+		proxy.ServeHTTP(c.Writer, c.Request)
+	}
 }
