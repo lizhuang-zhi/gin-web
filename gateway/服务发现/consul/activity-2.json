@@ -1,0 +1,17 @@
+{
+  "Service": {
+    "ID": "activity-2",
+    "Name": "activity",
+    "Tags": [
+      "urlprefix-/activity strip=/activity"
+    ],
+    "Address": "127.0.0.1",
+    "Port": 8083,
+    "Check": {
+      "HTTP": "http://127.0.0.1:8083/health",
+      "Method": "GET",
+      "Interval": "10s",
+      "Timeout": "1s"
+    }
+  }
+}
