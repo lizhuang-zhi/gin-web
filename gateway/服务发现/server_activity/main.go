@@ -21,6 +21,6 @@ func main() {
 		fmt.Fprintf(w, "服务正常")
 	})
 
-	log.Println("activity services are running on port 8081...")
-	log.Fatal(http.ListenAndServe(":8081", nil))
+	log.Println("activity services are running on port 8089...")
+	log.Fatal(http.ListenAndServe(":8089", nil))
 }

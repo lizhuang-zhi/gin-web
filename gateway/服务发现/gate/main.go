@@ -162,13 +162,14 @@ func main() {
 	// 动态服务发现与健康检查
 	/*
 		这里省略了外部操作, 需要将服务注册到Consul中, 例如:
-		1. 本地启动Consul服务: consul agent -dev
+		1. 本地启动Consul服务: consul agent -dev(可通过http://localhost:8500/ui/dc1/services查看服务注册UI情况)
 		2. 注册服务:
 			cd gateway/服务发现/consul/json
 			consul services register activity-1.json
 			consul services register activity-2.json
 		3. 运行命令查询Consul中注册的服务:
 			consul catalog services
+
 	*/
 	activityServiceName := "activity" // 活动服务在Consul中注册的名称: 具体查看consul/json中的"Name": "activity",
 	activityInstances, err := DiscoverServiceInstances(consulClient, activityServiceName)

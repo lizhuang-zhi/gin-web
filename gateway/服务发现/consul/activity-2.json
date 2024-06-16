@@ -6,9 +6,9 @@
       "urlprefix-/activity strip=/activity"
     ],
     "Address": "127.0.0.1",
-    "Port": 8083,
+    "Port": 8090,
     "Check": {
-      "HTTP": "http://127.0.0.1:8083/health",
+      "HTTP": "http://127.0.0.1:8090/health",
       "Method": "GET",
       "Interval": "10s",
       "Timeout": "1s"
