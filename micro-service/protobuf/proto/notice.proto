@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+option go_package = ".;service";
+
+service NoticeService {
+    rpc GetNotice(GetNoticeRequest) returns (GetNoticeResponse) {}
+}
+
+message GetNoticeRequest {
+    int64 id = 1;
+}
+
+message GetNoticeResponse {
+    Notice notice = 1;
+}
+
+message Notice {
+    int64 id = 1;
+    string title = 2;
+    int64 sub_type = 3;
+    string content = 4;
+}
