@@ -1,11 +1,11 @@
 package main
 
 import (
+	"booking-app/micro-service/core"
 	"booking-app/micro-service/model"
 	pb "booking-app/micro-service/protobuf/gen-pb"
 	"booking-app/micro-service/router"
 	"context"
-	"log"
 	"net"
 	"sync"
 
@@ -13,6 +13,7 @@ import (
 )
 
 type NoticeService struct {
+	opts *core.Options
 	pb.UnimplementedNoticeServiceServer
 }
 
@@ -41,36 +42,42 @@ func (s *NoticeService) GetNotice(ctx context.Context, req *pb.GetNoticeRequest)
 func main() {
 	var wg sync.WaitGroup
 
+	options := core.NewOptions()
+	noticeService := &NoticeService{
+		opts: options,
+	}
+
 	wg.Add(2)
 
-	go startHTTPServer(&wg)
-	go startGRPCServer(&wg)
+	go startHTTPServer(&wg, options)
+	go startGRPCServer(&wg, noticeService)
 
 	wg.Wait()
 }
 
 // HTTP server
-func startHTTPServer(wg *sync.WaitGroup) {
+func startHTTPServer(wg *sync.WaitGroup, opts *core.Options) {
 	defer wg.Done()
 
-	r := router.Routers()
-	log.Println("Activity HTTP Service is running on port 13001...")
+	r := router.Routers(opts)
+	opts.Logger.Println("Activity HTTP Service is running on port 13001...")
+
 	r.Run(":13001")
 }
 
 // GRPC server
-func startGRPCServer(wg *sync.WaitGroup) {
+func startGRPCServer(wg *sync.WaitGroup, noticeService *NoticeService) {
 	defer wg.Done()
 
 	listen, err := net.Listen("tcp", ":13002")
 	if err != nil {
-		log.Fatalf("grpc failed to listen: %v", err)
+		noticeService.opts.Logger.Fatalf("grpc failed to listen: %v", err)
 	}
 
 	grpcServer := grpc.NewServer()
-	pb.RegisterNoticeServiceServer(grpcServer, &NoticeService{})
-	log.Println("Activity GRPC Service is running on port 13002...")
+	pb.RegisterNoticeServiceServer(grpcServer, noticeService)
+	noticeService.opts.Logger.Println("Activity GRPC Service is running on port 13002...")
 	if err := grpcServer.Serve(listen); err != nil {
-		log.Fatalf("Failed to serve gRPC: %v", err)
+		noticeService.opts.Logger.Fatalf("Failed to serve gRPC: %v", err)
 	}
 }
