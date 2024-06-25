@@ -17,11 +17,15 @@
 1. 新增Options,包含logger组件
 2. 新增MongoDB组件
 
-## 场景流程任务3 - 待定
+## 场景流程任务3 - 新增grpc协议，单独封装到manager包下
 ### 任务
-1. 实现集中化日志管理（如 ELK Stack：Elasticsearch、Logstash、Kibana）
+1. 书写更多grpc服务，然后封装管理
 
 ## 场景流程任务4 - 待定
 ### 任务
 1. 新增服务(但是要给这个服务找到他应该存在的意义,才能添加)
 2. 新增网关服务区分访问
+
+## 场景流程任务5 - 待定
+### 任务
+1. 实现集中化日志管理（如 ELK Stack：Elasticsearch、Logstash、Kibana）

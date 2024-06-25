@@ -4,6 +4,8 @@ option go_package = ".;service";
 
 service NoticeService {
     rpc GetNotice(GetNoticeRequest) returns (GetNoticeResponse) {}
+    rpc GetNotices(GetNoticesRequest) returns (GetNoticesResponse) {}
+    rpc UpdateNoticeById(UpdateNoticeRequest) returns (UpdateNoticeResponse) {}
 }
 
 message GetNoticeRequest {
@@ -19,4 +21,22 @@ message Notice {
     string title = 2;
     int64 sub_type = 3;
     string content = 4;
+}
+
+message GetNoticesRequest {
+}
+
+message GetNoticesResponse {
+    repeated Notice notices = 1;
+}
+
+message UpdateNoticeRequest {
+    int64 id = 1;
+    string title = 2;
+    int64 sub_type = 3;
+    string content = 4;
+}
+
+message UpdateNoticeResponse {
+    bool success = 1;
 }
