@@ -1,8 +1,8 @@
 package manager
 
 import (
-	"booking-app/micro-service/core"
-	"booking-app/micro-service/model"
+	"booking-app/micro-service/cluster/activity/model"
+	"booking-app/micro-service/cluster/common/core"
 	pb "booking-app/micro-service/protobuf/gen-pb"
 	"context"
 

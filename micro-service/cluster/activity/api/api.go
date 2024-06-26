@@ -1,9 +1,10 @@
 package api
 
 import (
-	"booking-app/micro-service/common"
-	"booking-app/micro-service/core"
-	"booking-app/micro-service/model"
+	"booking-app/micro-service/cluster/common"
+	"booking-app/micro-service/cluster/common/core"
+
+	"booking-app/micro-service/cluster/activity/model"
 
 	"github.com/gin-gonic/gin"
 )

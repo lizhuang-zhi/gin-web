@@ -1,7 +1,7 @@
 package router
 
 import (
-	"booking-app/micro-service/core"
+	"booking-app/micro-service/cluster/common/core"
 	"net/http"
 
 	"github.com/gin-gonic/gin"

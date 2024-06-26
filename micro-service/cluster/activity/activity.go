@@ -1,22 +1,26 @@
-package main
+package activity
 
 import (
-	"booking-app/micro-service/core"
-	"booking-app/micro-service/manager"
+	"booking-app/micro-service/cluster/activity/manager"
+	"booking-app/micro-service/cluster/activity/router"
+	"booking-app/micro-service/cluster/common/core"
+	"booking-app/micro-service/core/server"
 	pb "booking-app/micro-service/protobuf/gen-pb"
-	"booking-app/micro-service/router"
-	"fmt"
 	"net"
 	"sync"
 
-	"github.com/spf13/pflag"
 	"google.golang.org/grpc"
 )
 
-func main() {
-	// 读取配置
-	LoadConfig()
+type Server struct {
+	server.Base
+}
 
+func NewServerInstance() *Server {
+	return &Server{}
+}
+
+func (s *Server) Start() error {
 	// 启动服务
 	var wg sync.WaitGroup
 
@@ -29,18 +33,8 @@ func main() {
 	go StartGRPCServer(&wg, noticeService)
 
 	wg.Wait()
-}
 
-func LoadConfig() {
-	// 读取命令行参数
-	configFilePath := pflag.StringP("config", "c", "./configs/local/config.yaml", "config file path")
-	pflag.Parse()
-
-	// 初始化配置
-	err := core.InitConfig(*configFilePath)
-	if err != nil {
-		panic(fmt.Errorf("init config err:%v", err))
-	}
+	return nil
 }
 
 // HTTP server

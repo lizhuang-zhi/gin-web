@@ -1,7 +1,7 @@
 package model
 
 import (
-	"booking-app/micro-service/core"
+	"booking-app/micro-service/cluster/common/core"
 
 	"github.com/gin-gonic/gin"
 	"go.mongodb.org/mongo-driver/bson"

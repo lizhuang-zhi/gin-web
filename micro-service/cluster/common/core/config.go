@@ -1,7 +1,7 @@
 package core
 
 import (
-	"booking-app/micro-service/utils"
+	"booking-app/micro-service/cluster/common/utils"
 
 	"github.com/spf13/viper"
 )

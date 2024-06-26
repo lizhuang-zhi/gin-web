@@ -1,8 +1,12 @@
+.PHONY: client
+client: ## Startup Client
+	go run ./client/main.go
+
 .PHONY: proto
 proto: ## Generate protobuf
-	./gen-pb.sh
+	./scripts/gen-pb.sh
 
 .PHONY: run
 run: ## Startup Micro Service
-	go run main.go -c=./configs/local/config.yaml
+	go run ./cluster/main.go -c=./configs/local/config.yaml
 
