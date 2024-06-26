@@ -1,0 +1,14 @@
+# 微服务配置
+system:
+  server: "local"
+  version: 1.0.0
+  tcp_port: 13001
+  rpc_port: 13002
+
+# MongoDB
+mongodb:
+  host: 'mongodb://127.0.0.1:27017'
+
+# Redis
+redis:
+  host: 'redis://127.0.0.1:6379/0'

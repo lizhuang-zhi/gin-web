@@ -33,7 +33,7 @@ func NewOptions() *Options {
 
 func connectMongoDB() (*mongo.Client, error) {
 	// 设置 MongoDB 客户端选项
-	clientOptions := options.Client().ApplyURI("mongodb://localhost:27017")
+	clientOptions := options.Client().ApplyURI(Config.MongoDB.Host)
 
 	// 连接到 MongoDB
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
