@@ -34,6 +34,14 @@ func writeToMapRW(m map[string]string, key string, value string) {
 	m[key] = value      // 写入 map
 }
 
+/*
+************************** Sync.Mutex 和 Sync.RWMutex 的区别 **************************
+Sync.Mutex:更适用写多读少的场景，同一时间只有一个goroutine可以持有锁（这里不区分读写）
+
+Sync.RWMutex:更适用读多写少的场景，是一种更细粒度的锁，支持读写锁分离，同一时间下，
+多个goroutine可以同时持有读锁，但是只能有一个goroutine持有写锁
+*/
+
 // Sync.Once: 保证只执行一次操作，适用于初始化操作。例如某个函数只会被调用一次
 var once sync.Once
 
