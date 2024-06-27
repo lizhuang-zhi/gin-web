@@ -3,6 +3,7 @@ package main
 import (
 	"booking-app/micro-service/cluster/activity"
 	"booking-app/micro-service/cluster/common/core"
+	"booking-app/micro-service/core/logger"
 	"fmt"
 
 	"github.com/spf13/pflag"
@@ -11,6 +12,12 @@ import (
 func main() {
 	// 读取配置
 	LoadConfig()
+
+	// 初始化日志
+	logger.NewLogger()
+	defer logger.GetLogger().Sync()
+
+	logger.Info("start micro-service...")
 
 	// 启动服务
 	activity := activity.NewServerInstance()
