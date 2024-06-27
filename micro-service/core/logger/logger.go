@@ -1,6 +1,8 @@
 package logger
 
 import (
+	"booking-app/micro-service/cluster/common/core"
+
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 )
@@ -9,18 +11,39 @@ var sugarLogger *zap.SugaredLogger
 
 // 初始化日志配置
 func NewLogger() {
-	config := zap.NewProductionConfig()
-	config.EncoderConfig.EncodeTime = zapcore.ISO8601TimeEncoder   // 时间格式
-	config.EncoderConfig.EncodeLevel = zapcore.CapitalLevelEncoder // 级别格式
+	var zapConfig zap.Config
 
-	config.OutputPaths = append(config.OutputPaths, "./logs")
+	// 通过配置设置日志
+	switch core.Config.Log.Level {
+	case "debug":
+		zapConfig = zap.NewDevelopmentConfig()
+	case "info":
+		zapConfig = zap.NewProductionConfig()
+	default:
+		zapConfig = zap.NewProductionConfig()
+	}
 
-	logger, err := config.Build()
+	// 设置日志颜色
+	if core.Config.Log.Color {
+		zapConfig.EncoderConfig.EncodeLevel = zapcore.CapitalColorLevelEncoder
+	} else {
+		zapConfig.EncoderConfig.EncodeLevel = zapcore.CapitalLevelEncoder
+	}
+
+	// 设置日志格式
+	zapConfig.EncoderConfig.EncodeTime = zapcore.ISO8601TimeEncoder // 时间格式
+
+	// 设置日志输出
+	if core.Config.Log.Path != "" {
+		zapConfig.OutputPaths = append(zapConfig.OutputPaths, core.Config.Log.Path)
+	}
+
+	logger, err := zapConfig.Build()
 	if err != nil {
 		panic(err)
 	}
 
-	defer logger.Sync()
+	defer logger.Sync() // 确保日志缓冲区中的所有条目都已写入
 	sugarLogger = logger.Sugar()
 }
 

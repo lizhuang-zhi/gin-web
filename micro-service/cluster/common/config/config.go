@@ -18,4 +18,11 @@ type Server struct {
 	Redis struct {
 		Host string `mapstructure:"host"` // 连接地址
 	} `mapstructure:"redis"`
+
+	// 日志配置
+	Log struct {
+		Level string `mapstructure:"level"` // 日志级别
+		Color bool   `mapstructure:"color"` // 是否开启彩色日志
+		Path  string `mapstructure:"path"`  // 是否输出日志到文件，配置空则不输出
+	} `mapstructure:"log"`
 }

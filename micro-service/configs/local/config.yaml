@@ -7,8 +7,14 @@ system:
 
 # MongoDB
 mongodb:
-  host: 'mongodb://127.0.0.1:27017'
+  host: "mongodb://127.0.0.1:27017"
 
 # Redis
 redis:
-  host: 'redis://127.0.0.1:6379/0'
+  host: "redis://127.0.0.1:6379/0"
+
+# 日志配置
+log:
+  level: "debug"  # 日志级别
+  color: true  # 是否开启彩色日志
+  path: "./logs" # 是否输出日志到文件，配置空则不输出

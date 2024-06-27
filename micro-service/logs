@@ -1,0 +1,1 @@
+2024-06-27T16:03:44.252+0800	INFO	logger/logger.go:86	insert notice data to memory, id:2, title:更新公告, sub_type:5, content:测试日志
