@@ -185,6 +185,209 @@ func (x *Notice) GetContent() string {
 	return ""
 }
 
+type GetNoticesRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *GetNoticesRequest) Reset() {
+	*x = GetNoticesRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_protobuf_proto_notice_proto_msgTypes[3]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetNoticesRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetNoticesRequest) ProtoMessage() {}
+
+func (x *GetNoticesRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_proto_notice_proto_msgTypes[3]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetNoticesRequest.ProtoReflect.Descriptor instead.
+func (*GetNoticesRequest) Descriptor() ([]byte, []int) {
+	return file_protobuf_proto_notice_proto_rawDescGZIP(), []int{3}
+}
+
+type GetNoticesResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Notices []*Notice `protobuf:"bytes,1,rep,name=notices,proto3" json:"notices,omitempty"`
+}
+
+func (x *GetNoticesResponse) Reset() {
+	*x = GetNoticesResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_protobuf_proto_notice_proto_msgTypes[4]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetNoticesResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetNoticesResponse) ProtoMessage() {}
+
+func (x *GetNoticesResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_proto_notice_proto_msgTypes[4]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetNoticesResponse.ProtoReflect.Descriptor instead.
+func (*GetNoticesResponse) Descriptor() ([]byte, []int) {
+	return file_protobuf_proto_notice_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *GetNoticesResponse) GetNotices() []*Notice {
+	if x != nil {
+		return x.Notices
+	}
+	return nil
+}
+
+type UpdateNoticeRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Id      int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Title   string `protobuf:"bytes,2,opt,name=title,proto3" json:"title,omitempty"`
+	SubType int64  `protobuf:"varint,3,opt,name=sub_type,json=subType,proto3" json:"sub_type,omitempty"`
+	Content string `protobuf:"bytes,4,opt,name=content,proto3" json:"content,omitempty"`
+}
+
+func (x *UpdateNoticeRequest) Reset() {
+	*x = UpdateNoticeRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_protobuf_proto_notice_proto_msgTypes[5]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *UpdateNoticeRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateNoticeRequest) ProtoMessage() {}
+
+func (x *UpdateNoticeRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_proto_notice_proto_msgTypes[5]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateNoticeRequest.ProtoReflect.Descriptor instead.
+func (*UpdateNoticeRequest) Descriptor() ([]byte, []int) {
+	return file_protobuf_proto_notice_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *UpdateNoticeRequest) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *UpdateNoticeRequest) GetTitle() string {
+	if x != nil {
+		return x.Title
+	}
+	return ""
+}
+
+func (x *UpdateNoticeRequest) GetSubType() int64 {
+	if x != nil {
+		return x.SubType
+	}
+	return 0
+}
+
+func (x *UpdateNoticeRequest) GetContent() string {
+	if x != nil {
+		return x.Content
+	}
+	return ""
+}
+
+type UpdateNoticeResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Success bool `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
+}
+
+func (x *UpdateNoticeResponse) Reset() {
+	*x = UpdateNoticeResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_protobuf_proto_notice_proto_msgTypes[6]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *UpdateNoticeResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateNoticeResponse) ProtoMessage() {}
+
+func (x *UpdateNoticeResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_proto_notice_proto_msgTypes[6]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateNoticeResponse.ProtoReflect.Descriptor instead.
+func (*UpdateNoticeResponse) Descriptor() ([]byte, []int) {
+	return file_protobuf_proto_notice_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *UpdateNoticeResponse) GetSuccess() bool {
+	if x != nil {
+		return x.Success
+	}
+	return false
+}
+
 var File_protobuf_proto_notice_proto protoreflect.FileDescriptor
 
 var file_protobuf_proto_notice_proto_rawDesc = []byte{
@@ -201,13 +404,36 @@ var file_protobuf_proto_notice_proto_rawDesc = []byte{
 	0x52, 0x05, 0x74, 0x69, 0x74, 0x6c, 0x65, 0x12, 0x19, 0x0a, 0x08, 0x73, 0x75, 0x62, 0x5f, 0x74,
 	0x79, 0x70, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x03, 0x52, 0x07, 0x73, 0x75, 0x62, 0x54, 0x79,
 	0x70, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x18, 0x04, 0x20,
-	0x01, 0x28, 0x09, 0x52, 0x07, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x32, 0x45, 0x0a, 0x0d,
-	0x4e, 0x6f, 0x74, 0x69, 0x63, 0x65, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x34, 0x0a,
-	0x09, 0x47, 0x65, 0x74, 0x4e, 0x6f, 0x74, 0x69, 0x63, 0x65, 0x12, 0x11, 0x2e, 0x47, 0x65, 0x74,
-	0x4e, 0x6f, 0x74, 0x69, 0x63, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x12, 0x2e,
-	0x47, 0x65, 0x74, 0x4e, 0x6f, 0x74, 0x69, 0x63, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
-	0x65, 0x22, 0x00, 0x42, 0x0b, 0x5a, 0x09, 0x2e, 0x3b, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65,
-	0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x01, 0x28, 0x09, 0x52, 0x07, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x22, 0x13, 0x0a, 0x11,
+	0x47, 0x65, 0x74, 0x4e, 0x6f, 0x74, 0x69, 0x63, 0x65, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
+	0x74, 0x22, 0x37, 0x0a, 0x12, 0x47, 0x65, 0x74, 0x4e, 0x6f, 0x74, 0x69, 0x63, 0x65, 0x73, 0x52,
+	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x21, 0x0a, 0x07, 0x6e, 0x6f, 0x74, 0x69, 0x63,
+	0x65, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x07, 0x2e, 0x4e, 0x6f, 0x74, 0x69, 0x63,
+	0x65, 0x52, 0x07, 0x6e, 0x6f, 0x74, 0x69, 0x63, 0x65, 0x73, 0x22, 0x70, 0x0a, 0x13, 0x55, 0x70,
+	0x64, 0x61, 0x74, 0x65, 0x4e, 0x6f, 0x74, 0x69, 0x63, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
+	0x74, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x02, 0x69,
+	0x64, 0x12, 0x14, 0x0a, 0x05, 0x74, 0x69, 0x74, 0x6c, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09,
+	0x52, 0x05, 0x74, 0x69, 0x74, 0x6c, 0x65, 0x12, 0x19, 0x0a, 0x08, 0x73, 0x75, 0x62, 0x5f, 0x74,
+	0x79, 0x70, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x03, 0x52, 0x07, 0x73, 0x75, 0x62, 0x54, 0x79,
+	0x70, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x18, 0x04, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x07, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x22, 0x30, 0x0a, 0x14,
+	0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x4e, 0x6f, 0x74, 0x69, 0x63, 0x65, 0x52, 0x65, 0x73, 0x70,
+	0x6f, 0x6e, 0x73, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x73, 0x75, 0x63, 0x63, 0x65, 0x73, 0x73, 0x18,
+	0x01, 0x20, 0x01, 0x28, 0x08, 0x52, 0x07, 0x73, 0x75, 0x63, 0x63, 0x65, 0x73, 0x73, 0x32, 0xc1,
+	0x01, 0x0a, 0x0d, 0x4e, 0x6f, 0x74, 0x69, 0x63, 0x65, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65,
+	0x12, 0x34, 0x0a, 0x09, 0x47, 0x65, 0x74, 0x4e, 0x6f, 0x74, 0x69, 0x63, 0x65, 0x12, 0x11, 0x2e,
+	0x47, 0x65, 0x74, 0x4e, 0x6f, 0x74, 0x69, 0x63, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
+	0x1a, 0x12, 0x2e, 0x47, 0x65, 0x74, 0x4e, 0x6f, 0x74, 0x69, 0x63, 0x65, 0x52, 0x65, 0x73, 0x70,
+	0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x37, 0x0a, 0x0a, 0x47, 0x65, 0x74, 0x4e, 0x6f, 0x74,
+	0x69, 0x63, 0x65, 0x73, 0x12, 0x12, 0x2e, 0x47, 0x65, 0x74, 0x4e, 0x6f, 0x74, 0x69, 0x63, 0x65,
+	0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x13, 0x2e, 0x47, 0x65, 0x74, 0x4e, 0x6f,
+	0x74, 0x69, 0x63, 0x65, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12,
+	0x41, 0x0a, 0x10, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x4e, 0x6f, 0x74, 0x69, 0x63, 0x65, 0x42,
+	0x79, 0x49, 0x64, 0x12, 0x14, 0x2e, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x4e, 0x6f, 0x74, 0x69,
+	0x63, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x15, 0x2e, 0x55, 0x70, 0x64, 0x61,
+	0x74, 0x65, 0x4e, 0x6f, 0x74, 0x69, 0x63, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
+	0x22, 0x00, 0x42, 0x0b, 0x5a, 0x09, 0x2e, 0x3b, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x62,
+	0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -222,21 +448,30 @@ func file_protobuf_proto_notice_proto_rawDescGZIP() []byte {
 	return file_protobuf_proto_notice_proto_rawDescData
 }
 
-var file_protobuf_proto_notice_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_protobuf_proto_notice_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
 var file_protobuf_proto_notice_proto_goTypes = []interface{}{
-	(*GetNoticeRequest)(nil),  // 0: GetNoticeRequest
-	(*GetNoticeResponse)(nil), // 1: GetNoticeResponse
-	(*Notice)(nil),            // 2: Notice
+	(*GetNoticeRequest)(nil),     // 0: GetNoticeRequest
+	(*GetNoticeResponse)(nil),    // 1: GetNoticeResponse
+	(*Notice)(nil),               // 2: Notice
+	(*GetNoticesRequest)(nil),    // 3: GetNoticesRequest
+	(*GetNoticesResponse)(nil),   // 4: GetNoticesResponse
+	(*UpdateNoticeRequest)(nil),  // 5: UpdateNoticeRequest
+	(*UpdateNoticeResponse)(nil), // 6: UpdateNoticeResponse
 }
 var file_protobuf_proto_notice_proto_depIdxs = []int32{
 	2, // 0: GetNoticeResponse.notice:type_name -> Notice
-	0, // 1: NoticeService.GetNotice:input_type -> GetNoticeRequest
-	1, // 2: NoticeService.GetNotice:output_type -> GetNoticeResponse
-	2, // [2:3] is the sub-list for method output_type
-	1, // [1:2] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	2, // 1: GetNoticesResponse.notices:type_name -> Notice
+	0, // 2: NoticeService.GetNotice:input_type -> GetNoticeRequest
+	3, // 3: NoticeService.GetNotices:input_type -> GetNoticesRequest
+	5, // 4: NoticeService.UpdateNoticeById:input_type -> UpdateNoticeRequest
+	1, // 5: NoticeService.GetNotice:output_type -> GetNoticeResponse
+	4, // 6: NoticeService.GetNotices:output_type -> GetNoticesResponse
+	6, // 7: NoticeService.UpdateNoticeById:output_type -> UpdateNoticeResponse
+	5, // [5:8] is the sub-list for method output_type
+	2, // [2:5] is the sub-list for method input_type
+	2, // [2:2] is the sub-list for extension type_name
+	2, // [2:2] is the sub-list for extension extendee
+	0, // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_protobuf_proto_notice_proto_init() }
@@ -281,6 +516,54 @@ func file_protobuf_proto_notice_proto_init() {
 				return nil
 			}
 		}
+		file_protobuf_proto_notice_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetNoticesRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_protobuf_proto_notice_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetNoticesResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_protobuf_proto_notice_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*UpdateNoticeRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_protobuf_proto_notice_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*UpdateNoticeResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -288,7 +571,7 @@ func file_protobuf_proto_notice_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_protobuf_proto_notice_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   3,
+			NumMessages:   7,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

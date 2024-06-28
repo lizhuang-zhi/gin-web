@@ -19,7 +19,9 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	NoticeService_GetNotice_FullMethodName = "/NoticeService/GetNotice"
+	NoticeService_GetNotice_FullMethodName        = "/NoticeService/GetNotice"
+	NoticeService_GetNotices_FullMethodName       = "/NoticeService/GetNotices"
+	NoticeService_UpdateNoticeById_FullMethodName = "/NoticeService/UpdateNoticeById"
 )
 
 // NoticeServiceClient is the client API for NoticeService service.
@@ -27,6 +29,8 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type NoticeServiceClient interface {
 	GetNotice(ctx context.Context, in *GetNoticeRequest, opts ...grpc.CallOption) (*GetNoticeResponse, error)
+	GetNotices(ctx context.Context, in *GetNoticesRequest, opts ...grpc.CallOption) (*GetNoticesResponse, error)
+	UpdateNoticeById(ctx context.Context, in *UpdateNoticeRequest, opts ...grpc.CallOption) (*UpdateNoticeResponse, error)
 }
 
 type noticeServiceClient struct {
@@ -46,11 +50,31 @@ func (c *noticeServiceClient) GetNotice(ctx context.Context, in *GetNoticeReques
 	return out, nil
 }
 
+func (c *noticeServiceClient) GetNotices(ctx context.Context, in *GetNoticesRequest, opts ...grpc.CallOption) (*GetNoticesResponse, error) {
+	out := new(GetNoticesResponse)
+	err := c.cc.Invoke(ctx, NoticeService_GetNotices_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *noticeServiceClient) UpdateNoticeById(ctx context.Context, in *UpdateNoticeRequest, opts ...grpc.CallOption) (*UpdateNoticeResponse, error) {
+	out := new(UpdateNoticeResponse)
+	err := c.cc.Invoke(ctx, NoticeService_UpdateNoticeById_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // NoticeServiceServer is the server API for NoticeService service.
 // All implementations must embed UnimplementedNoticeServiceServer
 // for forward compatibility
 type NoticeServiceServer interface {
 	GetNotice(context.Context, *GetNoticeRequest) (*GetNoticeResponse, error)
+	GetNotices(context.Context, *GetNoticesRequest) (*GetNoticesResponse, error)
+	UpdateNoticeById(context.Context, *UpdateNoticeRequest) (*UpdateNoticeResponse, error)
 	mustEmbedUnimplementedNoticeServiceServer()
 }
 
@@ -60,6 +84,12 @@ type UnimplementedNoticeServiceServer struct {
 
 func (UnimplementedNoticeServiceServer) GetNotice(context.Context, *GetNoticeRequest) (*GetNoticeResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetNotice not implemented")
+}
+func (UnimplementedNoticeServiceServer) GetNotices(context.Context, *GetNoticesRequest) (*GetNoticesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetNotices not implemented")
+}
+func (UnimplementedNoticeServiceServer) UpdateNoticeById(context.Context, *UpdateNoticeRequest) (*UpdateNoticeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateNoticeById not implemented")
 }
 func (UnimplementedNoticeServiceServer) mustEmbedUnimplementedNoticeServiceServer() {}
 
@@ -92,6 +122,42 @@ func _NoticeService_GetNotice_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _NoticeService_GetNotices_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetNoticesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NoticeServiceServer).GetNotices(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NoticeService_GetNotices_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NoticeServiceServer).GetNotices(ctx, req.(*GetNoticesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NoticeService_UpdateNoticeById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateNoticeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NoticeServiceServer).UpdateNoticeById(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NoticeService_UpdateNoticeById_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NoticeServiceServer).UpdateNoticeById(ctx, req.(*UpdateNoticeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // NoticeService_ServiceDesc is the grpc.ServiceDesc for NoticeService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -102,6 +168,14 @@ var NoticeService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetNotice",
 			Handler:    _NoticeService_GetNotice_Handler,
+		},
+		{
+			MethodName: "GetNotices",
+			Handler:    _NoticeService_GetNotices_Handler,
+		},
+		{
+			MethodName: "UpdateNoticeById",
+			Handler:    _NoticeService_UpdateNoticeById_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
