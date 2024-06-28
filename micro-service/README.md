@@ -44,12 +44,49 @@
 1. yaml配置新增日志配置
 2. 收集日志到本地可视化工具，并展示[Elasticsearch、Kibana]（后续再尝试）
 
+## 场景流程任务7 - 重新整理微服务项目结构
+### 任务
+micro-service/
+├── client/                   # 客户端，如Go语言的客户端
+├── cluster/
+│   ├── activity/
+│   │   ├── api               # Activity服务的HTTP接口
+│   │   ├── manager           # Activity服务的GRPC接口服务实现
+│   │   ├── model             # Activity服务的HTTP接口数据持久化
+│   │   ├── router            # Activity服务的HTTP接口路由层
+│   │   └── activity.go       # Activity服务启动入口
+│   ├── mail/
+│   │   └── mail.go           # Mail服务启动入口
+│   ├── common/
+│   │   └── config            # 配置管理，如读取和解析配置文件
+│   │   └── logger            # 日志处理，
+│   │   └── mongodb           # 数据库处理
+│   │   └── utils             # 实用工具函数
+├── cmd/
+│   └── server/
+│       └── main.go           # 统一启动所有服务的入口文件
+├── configs/
+│   └── local           
+│       └── config.yaml       # 配置文件，如日志级别、MongoDB连接信息等
+├── protobuf/                 
+│   └── gen-pb                # 生成pb文件
+│   └── proto                 # 定义的协议文件
+│       └── notice.proto      # 公告协议文件
+├── scripts/                  # 启动脚本和部署脚本
+├── logs                      # 日志文件
+├── Makefile                  # make命令脚本
+└── README.md                 # 项目文档，包括如何运行、部署和贡献代码的说明
+
+## 场景流程任务8 - 待定
+### 任务
+1. 广播
+
 ## 场景流程任务7 - 待定
 ### 任务
 1. 新增网关服务区分访问
 2. 新增服务
 
-## 场景流程任务8 - 待定
+## 场景流程任务9 - 待定
 ### 任务
 1. 等搭建几个服务后，书写部分openAPI接口，再通过make命令执行shell脚本，一键生成本地测试数据
 2. 但是需要考虑后续接口改动的成本

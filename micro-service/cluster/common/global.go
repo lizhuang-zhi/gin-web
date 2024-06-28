@@ -1,4 +1,15 @@
-package config
+package common
+
+import (
+	"go.mongodb.org/mongo-driver/mongo"
+	"go.uber.org/zap"
+)
+
+var (
+	Config      *Server            // 服务配置
+	MongoClient *mongo.Client      // MongoDB
+	Logger      *zap.SugaredLogger // 日志
+)
 
 type Server struct {
 	// 服务配置

@@ -1,7 +1,7 @@
 package model
 
 import (
-	"booking-app/micro-service/cluster/common/core"
+	"booking-app/micro-service/cluster/common"
 
 	"github.com/gin-gonic/gin"
 	"go.mongodb.org/mongo-driver/bson"
@@ -19,8 +19,8 @@ type Notice struct {
 var GlobalNotice = make(map[int]*Notice)
 
 // 查询公告数据
-func QueryNoticeData(c *gin.Context, opts *core.Options) ([]*Notice, error) {
-	collection := opts.MongoClient.Database("micro-service-activity").Collection("notice")
+func QueryNoticeData(c *gin.Context) ([]*Notice, error) {
+	collection := common.MongoClient.Database("micro-service-activity").Collection("notice")
 	cursor, err := collection.Find(c.Request.Context(), bson.M{})
 	if err != nil {
 		return nil, err
@@ -41,8 +41,8 @@ func QueryNoticeData(c *gin.Context, opts *core.Options) ([]*Notice, error) {
 }
 
 // 新增公告数据
-func InsertNoticeData(c *gin.Context, data *Notice, opts *core.Options) error {
-	collection := opts.MongoClient.Database("micro-service-activity").Collection("notice")
+func InsertNoticeData(c *gin.Context, data *Notice) error {
+	collection := common.MongoClient.Database("micro-service-activity").Collection("notice")
 	document := bson.M{
 		"id":       data.ID,
 		"title":    data.Title,

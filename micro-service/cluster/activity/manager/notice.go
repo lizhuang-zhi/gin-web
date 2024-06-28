@@ -2,7 +2,7 @@ package manager
 
 import (
 	"booking-app/micro-service/cluster/activity/model"
-	"booking-app/micro-service/cluster/common/core"
+	"booking-app/micro-service/cluster/common"
 	pb "booking-app/micro-service/protobuf/gen-pb"
 	"context"
 
@@ -11,17 +11,10 @@ import (
 
 type NoticeService struct {
 	pb.UnimplementedNoticeServiceServer
-	opts *core.Options
 }
 
-func NewNoticeService(opts *core.Options) *NoticeService {
-	return &NoticeService{
-		opts: opts,
-	}
-}
-
-func (s *NoticeService) GetOptions() *core.Options {
-	return s.opts
+func NewNoticeService() *NoticeService {
+	return &NoticeService{}
 }
 
 func (s *NoticeService) GetNotice(ctx context.Context, req *pb.GetNoticeRequest) (*pb.GetNoticeResponse, error) {
@@ -47,7 +40,7 @@ func (s *NoticeService) GetNotice(ctx context.Context, req *pb.GetNoticeRequest)
 }
 
 func (s *NoticeService) GetNotices(ctx context.Context, req *pb.GetNoticesRequest) (*pb.GetNoticesResponse, error) {
-	collection := s.opts.MongoClient.Database("micro-service-activity").Collection("notice")
+	collection := common.MongoClient.Database("micro-service-activity").Collection("notice")
 	cursor, err := collection.Find(ctx, bson.M{})
 	if err != nil {
 		return nil, err

@@ -4,9 +4,9 @@ client: ## Startup Client
 
 .PHONY: proto
 proto: ## Generate protobuf
-	./scripts/gen-pb.sh
+	sh ./scripts/gen-pb.sh
 
 .PHONY: run
 run: ## Startup Micro Service
-	go run ./cluster/main.go -c=./configs/local/config.yaml
+	go run ./cmd/server/main.go -c=./configs/local/config.yaml
 

@@ -1,26 +1,25 @@
 package router
 
 import (
-	"booking-app/micro-service/cluster/common/core"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
 
-type Handler func(c *gin.Context, opts *core.Options) (data interface{}, err error)
+type Handler func(c *gin.Context) (data interface{}, err error)
 
-func Routers(opts *core.Options) *gin.Engine {
+func Routers() *gin.Engine {
 	r := gin.Default()
 	api := r.Group("")
 
-	InitNoticeRouter(api, opts) // 公告相关路由
+	InitNoticeRouter(api) // 公告相关路由
 
 	return r
 }
 
-func WrapHandle(handler Handler, opts *core.Options) gin.HandlerFunc {
+func WrapHandle(handler Handler) gin.HandlerFunc {
 	return func(c *gin.Context) {
-		data, err := handler(c, opts)
+		data, err := handler(c)
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{
 				"message": err.Error(),
