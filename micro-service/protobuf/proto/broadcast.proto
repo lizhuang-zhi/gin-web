@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+option go_package = ".;service";
+
+service BroadcastService {
+    // 服务端向客户端主动发送消息
+    rpc BroadcastPlayerNotify (BroadcastRequest) returns (stream PlayerBroadcast);
+}
+
+// 请求广播的结构
+message BroadcastRequest {}
+
+// 广播消息的结构
+message PlayerBroadcast {
+    repeated NotifyPacket packets = 1; // 多个数据包
+    int64 delay = 2;                   // 延时 单位：ms
+    repeated string osTypes = 3;       // 如果不为空，则按指定的平台发送，否则发送给所有平台
+}
+
+message NotifyPacket {
+    string message = 1;
+}
+
+message BroadcastResponse {
+    bool success = 1;
+}
