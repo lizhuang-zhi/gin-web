@@ -14,11 +14,11 @@ import (
 var ExcuteRpcName = map[string]bool{
 	// 公告
 	"GetNotice":        false,
-	"GetNotices":       true,
+	"GetNotices":       false,
 	"UpdateNoticeById": false,
 
 	// 广播
-	"BroadcastPlayerNotify": false,
+	"BroadcastPlayerNotify": true,
 }
 
 func main() {

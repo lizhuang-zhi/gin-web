@@ -8,5 +8,5 @@ proto: ## Generate protobuf
 
 .PHONY: run
 run: ## Startup Micro Service
-	go run ./cmd/server/main.go -c=./configs/local/config.yaml
+	go run ./cmd/server/main.go -c=./configs/local/config.yaml -v=1.0.0
 

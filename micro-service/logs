@@ -180,3 +180,50 @@
 2024-06-29T15:45:55.824+0800	[34mINFO[0m	logger/logger.go:84	Sent broadcast: Broadcast message 2024-06-29T15:45:55+08:00
 2024-06-29T15:45:56.827+0800	[34mINFO[0m	logger/logger.go:84	Sent broadcast: Broadcast message 2024-06-29T15:45:56+08:00
 2024-06-29T15:45:57.828+0800	[34mINFO[0m	logger/logger.go:84	Error sending broadcast message: rpc error: code = Unavailable desc = transport is closing
+2024-06-30T11:19:11.872+0800	[34mINFO[0m	logger/logger.go:59	start micro-service...
+2024-06-30T11:29:55.925+0800	[34mINFO[0m	logger/logger.go:59	start micro-service...
+2024-06-30T12:00:17.695+0800	[34mINFO[0m	logger/logger.go:59	start micro-service...
+2024-06-30T12:20:30.989+0800	[31mERROR[0m	logger/logger.go:94	grpc failed to listen: listen tcp :13002: bind: address already in use
+booking-app/micro-service/cluster/common/logger.Errorf
+	/Users/lilithgames/my-project/golang/gin-web/micro-service/cluster/common/logger/logger.go:94
+booking-app/micro-service/cluster/activity.StartGRPCServer
+	/Users/lilithgames/my-project/golang/gin-web/micro-service/cluster/activity/activity.go:48
+2024-06-30T12:20:30.989+0800	[34mINFO[0m	logger/logger.go:59	Activity HTTP Service is running on port 13001
+2024-06-30T12:20:30.990+0800	[34mINFO[0m	logger/logger.go:59	Activity GRPC Service is running on port 13002
+2024-06-30T12:20:44.062+0800	[34mINFO[0m	logger/logger.go:59	Activity HTTP Service is running on port 13001
+2024-06-30T12:20:44.062+0800	[31mERROR[0m	logger/logger.go:94	grpc failed to listen: listen tcp :13002: bind: address already in use
+booking-app/micro-service/cluster/common/logger.Errorf
+	/Users/lilithgames/my-project/golang/gin-web/micro-service/cluster/common/logger/logger.go:94
+booking-app/micro-service/cluster/activity.StartGRPCServer
+	/Users/lilithgames/my-project/golang/gin-web/micro-service/cluster/activity/activity.go:48
+2024-06-30T12:20:44.062+0800	[34mINFO[0m	logger/logger.go:59	Activity GRPC Service is running on port 13002
+2024-06-30T12:20:58.981+0800	[34mINFO[0m	logger/logger.go:59	Activity HTTP Service is running on port 13001
+2024-06-30T12:20:58.981+0800	[31mERROR[0m	logger/logger.go:94	grpc failed to listen: listen tcp :13002: bind: address already in use
+booking-app/micro-service/cluster/common/logger.Errorf
+	/Users/lilithgames/my-project/golang/gin-web/micro-service/cluster/common/logger/logger.go:94
+booking-app/micro-service/cluster/activity.StartGRPCServer
+	/Users/lilithgames/my-project/golang/gin-web/micro-service/cluster/activity/activity.go:48
+2024-06-30T12:20:58.981+0800	[34mINFO[0m	logger/logger.go:59	Activity GRPC Service is running on port 13002
+2024-06-30T12:21:39.015+0800	[34mINFO[0m	logger/logger.go:59	Activity HTTP Service is running on port 13001
+2024-06-30T12:21:39.016+0800	[34mINFO[0m	logger/logger.go:59	Activity GRPC Service is running on port 13002
+2024-06-30T12:22:01.973+0800	[34mINFO[0m	logger/logger.go:59	Activity HTTP Service is running on port 13001
+2024-06-30T12:22:01.974+0800	[34mINFO[0m	logger/logger.go:59	Activity GRPC Service is running on port 13002
+2024-06-30T12:23:10.253+0800	[34mINFO[0m	logger/logger.go:59	Activity HTTP Service is running on port 13001
+2024-06-30T12:23:10.254+0800	[34mINFO[0m	logger/logger.go:59	Activity GRPC Service is running on port 13002
+2024-06-30T12:23:35.432+0800	[34mINFO[0m	logger/logger.go:84	Sent broadcast: Broadcast message 2024-06-30T12:23:35+08:00
+2024-06-30T12:23:36.434+0800	[34mINFO[0m	logger/logger.go:84	Sent broadcast: Broadcast message 2024-06-30T12:23:36+08:00
+2024-06-30T12:23:37.435+0800	[34mINFO[0m	logger/logger.go:84	Sent broadcast: Broadcast message 2024-06-30T12:23:37+08:00
+2024-06-30T12:23:38.436+0800	[34mINFO[0m	logger/logger.go:84	Sent broadcast: Broadcast message 2024-06-30T12:23:38+08:00
+2024-06-30T12:23:39.438+0800	[34mINFO[0m	logger/logger.go:84	Error sending broadcast message: rpc error: code = Unavailable desc = transport is closing
+2024-06-30T12:24:06.893+0800	[34mINFO[0m	logger/logger.go:59	Activity GRPC Service is running on port 13002
+2024-06-30T12:24:06.893+0800	[34mINFO[0m	logger/logger.go:59	Activity HTTP Service is running on port 13001
+2024-06-30T14:13:24.326+0800	[34mINFO[0m	logger/logger.go:59	Activity HTTP Service is running on port 13001
+2024-06-30T14:13:24.326+0800	[34mINFO[0m	logger/logger.go:59	Activity GRPC Service is running on port 13002
+2024-06-30T14:14:21.430+0800	[34mINFO[0m	logger/logger.go:59	Activity HTTP Service is running on port 13001
+2024-06-30T14:14:21.430+0800	[34mINFO[0m	logger/logger.go:59	Activity GRPC Service is running on port 13002
+2024-06-30T14:14:43.948+0800	[34mINFO[0m	logger/logger.go:59	Activity HTTP Service is running on port 13001
+2024-06-30T14:14:43.948+0800	[34mINFO[0m	logger/logger.go:59	Activity GRPC Service is running on port 13002
+2024-06-30T14:15:47.705+0800	[34mINFO[0m	logger/logger.go:59	Activity GRPC Service is running on port 13002
+2024-06-30T14:15:47.705+0800	[34mINFO[0m	logger/logger.go:59	Activity HTTP Service is running on port 13001
+2024-06-30T14:16:10.323+0800	[34mINFO[0m	logger/logger.go:59	Activity HTTP Service is running on port 13001
+2024-06-30T14:16:10.323+0800	[34mINFO[0m	logger/logger.go:59	Activity GRPC Service is running on port 13002

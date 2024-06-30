@@ -47,7 +47,11 @@
 ## 场景流程任务7 - 重新整理微服务项目结构
 ### 任务
 micro-service/
-├── client/                   # 客户端，如Go语言的客户端
+├── client/                   # 客户端，如Go语言的客户端, 用于测试grpc方法
+│   ├── rpc
+│   │   ├── pbclient.go       # new client
+│   │   └── rpcmethod.go      # 调用rpc方法
+│   └── main.go               # client启动入口
 ├── cluster/
 │   ├── activity/
 │   │   ├── api               # Activity服务的HTTP接口
@@ -59,7 +63,7 @@ micro-service/
 │   │   └── mail.go           # Mail服务启动入口
 │   ├── common/
 │   │   └── config            # 配置管理，如读取和解析配置文件
-│   │   └── logger            # 日志处理，
+│   │   └── logger            # 日志处理
 │   │   └── mongodb           # 数据库处理
 │   │   └── utils             # 实用工具函数
 ├── cmd/
@@ -82,19 +86,16 @@ micro-service/
 1. grpc广播
 2. 整理客户端分类测试
 
-## 场景流程任务9 - 待定
-### 任务
-1. chatgpt给grpc需求
-2. 事件流
-3. 先理清微服务中的各个部分(事件、Broker...)
+## 场景流程任务9 - 使用cli、metadata初始化
+### 任务 
+1. cli、metadata
 
 ## 场景流程任务10 - 待定
 ### 任务
 1. 新增网关服务区分访问(实现网关映射到不同服务的grpc)
-2. 新增服务
+2. 整合网关内容(之前的服务发现、ip限流等)
 3. 实现新增端点(endpoints)
 
 ## 场景流程任务11 - 待定
 ### 任务
-1. 等搭建几个服务后，书写部分openAPI接口，再通过make命令执行shell脚本，一键生成本地测试数据
-2. 但是需要考虑后续接口改动的成本
+1. 等搭建几个服务后，书写部分openAPI接口，再通过make命令执行shell脚本，一键生成本地测试数据(待定,先不做)
