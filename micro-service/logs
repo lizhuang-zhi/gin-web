@@ -227,3 +227,20 @@ booking-app/micro-service/cluster/activity.StartGRPCServer
 2024-06-30T14:15:47.705+0800	[34mINFO[0m	logger/logger.go:59	Activity HTTP Service is running on port 13001
 2024-06-30T14:16:10.323+0800	[34mINFO[0m	logger/logger.go:59	Activity HTTP Service is running on port 13001
 2024-06-30T14:16:10.323+0800	[34mINFO[0m	logger/logger.go:59	Activity GRPC Service is running on port 13002
+2024-06-30T21:39:17.021+0800	[34mINFO[0m	logger/logger.go:59	Activity GRPC Service is running on port 13002
+2024-06-30T21:39:17.021+0800	[34mINFO[0m	logger/logger.go:59	Activity HTTP Service is running on port 13001
+2024-06-30T21:41:06.465+0800	[34mINFO[0m	logger/logger.go:59	Activity HTTP Service is running on port 13001
+2024-06-30T21:41:06.465+0800	[34mINFO[0m	logger/logger.go:59	Activity GRPC Service is running on port 13002
+2024-06-30T21:43:05.210+0800	[34mINFO[0m	logger/logger.go:59	Lobby GRPC Service is running on port 14002
+2024-06-30T21:49:14.509+0800	[34mINFO[0m	logger/logger.go:59	Lobby GRPC Service is running on port 14002
+2024-06-30T21:51:13.541+0800	[34mINFO[0m	logger/logger.go:59	Activity GRPC Service is running on port 13002
+2024-06-30T21:51:13.541+0800	[34mINFO[0m	logger/logger.go:59	Activity HTTP Service is running on port 13001
+2024-06-30T21:51:58.245+0800	[34mINFO[0m	logger/logger.go:59	Lobby GRPC Service is running on port 14002
+2024-06-30T21:57:27.896+0800	[34mINFO[0m	logger/logger.go:59	Lobby GRPC Service is running on port 14002
+2024-06-30T21:57:27.896+0800	[34mINFO[0m	logger/logger.go:59	Activity HTTP Service is running on port 13001
+2024-06-30T21:57:27.896+0800	[34mINFO[0m	logger/logger.go:59	Activity GRPC Service is running on port 13002
+2024-06-30T21:58:12.845+0800	[34mINFO[0m	logger/logger.go:84	Sent broadcast: Broadcast message 2024-06-30T21:58:12+08:00
+2024-06-30T21:58:13.845+0800	[34mINFO[0m	logger/logger.go:84	Sent broadcast: Broadcast message 2024-06-30T21:58:13+08:00
+2024-06-30T21:58:14.846+0800	[34mINFO[0m	logger/logger.go:84	Sent broadcast: Broadcast message 2024-06-30T21:58:14+08:00
+2024-06-30T21:58:15.847+0800	[34mINFO[0m	logger/logger.go:84	Sent broadcast: Broadcast message 2024-06-30T21:58:15+08:00
+2024-06-30T21:58:16.848+0800	[34mINFO[0m	logger/logger.go:84	Error sending broadcast message: rpc error: code = Unavailable desc = transport is closing

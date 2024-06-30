@@ -75,3 +75,29 @@ func BroadcastPlayerNotify(broadcaseClient pb.BroadcastServiceClient) {
 		time.Sleep(1 * time.Second)
 	}
 }
+
+// 获取用户通过ID
+func GetUser(client pb.UserServiceClient) {
+	resp, err := client.GetUser(context.Background(), &pb.GetUserRequest{Id: "12"})
+	if err != nil {
+		log.Fatalf("could not greet: %v", err)
+	}
+	log.Printf("Response: %v", resp)
+}
+
+// 创建用户
+func CreateUser(client pb.UserServiceClient) {
+	newUser := &pb.User{
+		Id:    "12",
+		Name:  "Jim",
+		Email: "19223@qq.com",
+	}
+
+	resp, err := client.CreateUser(context.Background(), &pb.CreateUserRequest{
+		User: newUser,
+	})
+	if err != nil {
+		log.Fatalf("could not greet: %v", err)
+	}
+	log.Printf("Response: %v", resp)
+}

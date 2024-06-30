@@ -19,10 +19,14 @@ var ExcuteRpcName = map[string]bool{
 
 	// 广播
 	"BroadcastPlayerNotify": true,
+
+	// 大厅
+	"CreateUser": false,
+	"GetUser":    false,
 }
 
 func main() {
-	conn, err := grpc.Dial("127.0.0.1:13002", grpc.WithTransportCredentials(insecure.NewCredentials()), grpc.WithBlock())
+	conn, err := grpc.Dial("127.0.0.1:14002", grpc.WithTransportCredentials(insecure.NewCredentials()), grpc.WithBlock())
 	if err != nil {
 		log.Fatalf("did not connect: %v", err)
 	}
@@ -31,6 +35,7 @@ func main() {
 	// 建立连接
 	client := rpc.GetActivityNoticeClient(conn)
 	broadcaseClient := rpc.GetActivityBroadcastClient(conn)
+	userClient := rpc.GetLobbyUserClient(conn)
 
 	// 映射各rpc方法
 	var excuteNoticeMap = map[string]func(client pb.NoticeServiceClient){
@@ -40,6 +45,10 @@ func main() {
 	}
 	var excuteBroadcastMap = map[string]func(client pb.BroadcastServiceClient){
 		"BroadcastPlayerNotify": rpc.BroadcastPlayerNotify,
+	}
+	var excuteUserMap = map[string]func(client pb.UserServiceClient){
+		"CreateUser": rpc.CreateUser,
+		"GetUser":    rpc.GetUser,
 	}
 
 	// 执行rpc方法
@@ -54,5 +63,11 @@ func main() {
 			continue
 		}
 		excute(broadcaseClient)
+	}
+	for key, excute := range excuteUserMap {
+		if !ExcuteRpcName[key] {
+			continue
+		}
+		excute(userClient)
 	}
 }

@@ -14,10 +14,8 @@ var (
 type Server struct {
 	// 服务配置
 	System struct {
-		Server  string `mapstructure:"server"`   // 服务名称
-		Version string `mapstructure:"version"`  // 服务版本
-		TCPPort string `mapstructure:"tcp_port"` // TCP 端口
-		RPCPort string `mapstructure:"rpc_port"` // RPC 端口
+		Server  string `mapstructure:"server"`  // 服务名称
+		Version string `mapstructure:"version"` // 服务版本
 	} `mapstructure:"system"`
 
 	// MongoDB
@@ -36,4 +34,16 @@ type Server struct {
 		Color bool   `mapstructure:"color"` // 是否开启彩色日志
 		Path  string `mapstructure:"path"`  // 是否输出日志到文件，配置空则不输出
 	} `mapstructure:"log"`
+
+	// 活动服务配置
+	Activity struct {
+		TCPPort  string `mapstructure:"tcp_port"`  // TCP 端口
+		GRPCPort string `mapstructure:"grpc_port"` // gRPC 端口
+	} `mapstructure:"activity"`
+
+	// 大厅服务配置
+	Lobby struct {
+		TCPPort  string `mapstructure:"tcp_port"`  // TCP 端口
+		GRPCPort string `mapstructure:"grpc_port"` // gRPC 端口
+	} `mapstructure:"lobby"`
 }

@@ -13,3 +13,7 @@ func GetActivityNoticeClient(conn *grpc.ClientConn) pb.NoticeServiceClient {
 func GetActivityBroadcastClient(conn *grpc.ClientConn) pb.BroadcastServiceClient {
 	return pb.NewBroadcastServiceClient(conn)
 }
+
+func GetLobbyUserClient(conn *grpc.ClientConn) pb.UserServiceClient {
+	return pb.NewUserServiceClient(conn)
+}

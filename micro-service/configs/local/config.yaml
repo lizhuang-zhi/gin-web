@@ -2,8 +2,6 @@
 system:
   server: "local"
   version: 1.0.0
-  tcp_port: 13001
-  rpc_port: 13002
 
 # MongoDB
 mongodb:
@@ -18,3 +16,13 @@ log:
   level: "debug"  # 日志级别
   color: true  # 是否开启彩色日志
   path: "./logs" # 是否输出日志到文件，配置空则不输出
+
+# 活动服务配置
+activity:
+  tcp_port: 13001
+  grpc_port: 13002
+
+# 大厅服务配置
+lobby:
+  tcp_port: 14001
+  grpc_port: 14002
