@@ -59,6 +59,9 @@ micro-service/
 │   │   ├── model             # Activity服务的HTTP接口数据持久化
 │   │   ├── router            # Activity服务的HTTP接口路由层
 │   │   └── activity.go       # Activity服务启动入口
+│   ├── lobby/
+│   │   ├── manager           # Lobby服务的GRPC接口服务实现
+│   │   └── lobby.go          # Lobby服务启动入口
 │   ├── mail/
 │   │   └── mail.go           # Mail服务启动入口
 │   ├── common/
