@@ -3,18 +3,35 @@ package manager
 import (
 	"booking-app/micro-service/cluster/activity/model"
 	"booking-app/micro-service/cluster/common"
+	"booking-app/micro-service/cluster/common/commandpb"
 	pb "booking-app/micro-service/protobuf/gen-pb"
 	"context"
+	"sync"
 
 	"go.mongodb.org/mongo-driver/bson"
 )
 
+// TODO: *pb.GetNoticeRequest和 *pb.GetNoticeResponse 还没有抽象,所以目前只有一个rpc注册
+type MsgHandler func(context.Context, *pb.GetNoticeRequest) (*pb.GetNoticeResponse, error)
+
 type NoticeService struct {
 	pb.UnimplementedNoticeServiceServer
+
+	sync.RWMutex
+	regHandler map[commandpb.Command]MsgHandler
 }
 
 func NewNoticeService() *NoticeService {
-	return &NoticeService{}
+	return &NoticeService{
+		regHandler: make(map[commandpb.Command]MsgHandler),
+	}
+}
+
+func (s *NoticeService) RegisterHandler(comd commandpb.Command, msgHandler MsgHandler) {
+	s.Lock()
+	defer s.Unlock()
+
+	s.regHandler[comd] = msgHandler
 }
 
 func (s *NoticeService) GetNotice(ctx context.Context, req *pb.GetNoticeRequest) (*pb.GetNoticeResponse, error) {

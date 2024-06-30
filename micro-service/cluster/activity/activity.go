@@ -4,6 +4,7 @@ import (
 	"booking-app/micro-service/cluster/activity/manager"
 	"booking-app/micro-service/cluster/activity/router"
 	"booking-app/micro-service/cluster/common"
+	"booking-app/micro-service/cluster/common/commandpb"
 	"booking-app/micro-service/cluster/common/logger"
 	pb "booking-app/micro-service/protobuf/gen-pb"
 	"net"
@@ -11,6 +12,10 @@ import (
 
 	"google.golang.org/grpc"
 )
+
+var RPCHandlerInstance = RPCHandler{
+	regHandler: make(map[commandpb.Command]MsgHandler),
+}
 
 func Start() error {
 	// 启动服务
@@ -40,7 +45,7 @@ func StartHTTPServer(wg *sync.WaitGroup) {
 }
 
 // GRPC server
-func StartGRPCServer(wg *sync.WaitGroup, noticeService *manager.NoticeService, boardcastService *manager.BroadcastService) {
+func StartGRPCServer(wg *sync.WaitGroup, n *manager.NoticeService, b *manager.BroadcastService) {
 	defer wg.Done()
 
 	listen, err := net.Listen("tcp", ":"+common.Config.System.RPCPort)
@@ -49,10 +54,13 @@ func StartGRPCServer(wg *sync.WaitGroup, noticeService *manager.NoticeService, b
 	}
 
 	grpcServer := grpc.NewServer()
-	pb.RegisterNoticeServiceServer(grpcServer, noticeService)
-	pb.RegisterBroadcastServiceServer(grpcServer, boardcastService)
+	pb.RegisterNoticeServiceServer(grpcServer, n)
+	pb.RegisterBroadcastServiceServer(grpcServer, b)
 	logger.Info("Activity GRPC Service is running on port " + common.Config.System.RPCPort)
 	if err := grpcServer.Serve(listen); err != nil {
 		logger.Errorf("Failed to serve gRPC: %v", err)
 	}
+
+	// 注册rpc方法
+	n.RegisterHandler(commandpb.Command_ActivityGetNotice, n.GetNotice)
 }
