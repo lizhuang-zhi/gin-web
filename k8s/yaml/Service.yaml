@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata: 
+  name: external-service # 对象的名字
+spec: 
+  type: NodePort # 暴露方式
+  selector: # 选择器
+    app: nginx
+  ports: # 端口列表
+  - port: 80 # 对应Service的端口号
+    targetPort: 80 # 目标Pod的端口号
+    nodePort: 30001 # 对外暴露的端口号

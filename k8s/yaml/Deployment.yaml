@@ -1,0 +1,20 @@
+apiVersion: apps/v1 # 版本号
+kind: Deployment # 资源类型
+metadata: # 填写关于这个对象的标识
+  name: nginx-deployment # 对象的名字
+  labels: 
+    name: nginx-deployment
+spec: # 定义这个对象的规格
+  replicas: 4 # 副本数
+  selector: # 选择器
+    matchLabels: # 匹配标签
+      app: nginx
+  template: # 模板 (这里直接拷贝前面的pod.yaml中的metadata和spec部分)
+    metadata: # 填写关于这个对象的标识
+      name: nginx-pod # 对象的名字
+      labels: # 对象的标签
+        app: nginx
+    spec: # 定义这个对象的规格
+      containers: # 容器列表
+      - name: nginx-container # 容器的名字
+        image: nginx:1.25.3 # 修改新版本

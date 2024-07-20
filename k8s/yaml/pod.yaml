@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod  # 资源类型 
+metadata: # 填写关于这个对象的标识
+  name: nginx-pod # 对象的名字
+  labels: # 对象的标签
+    app: nginx
+spec: # 定义这个对象的规格
+  containers: # 容器列表
+  - name: nginx-container # 容器的名字
+    image: nginx # 容器的镜像
