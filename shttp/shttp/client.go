@@ -20,7 +20,8 @@ type Client struct {
 }
 
 func NewClient(opts ...ClientOptionFunc) *Client {
-	cliOptions := newClientOptions(opts...) // 通过options的写法, 扩展了NewClient的参数
+	// 通过options的写法, 扩展了NewClient的参数(options写法)
+	cliOptions := newClientOptions(opts...)
 
 	c := &Client{
 		Client: &http.Client{
