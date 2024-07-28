@@ -1,6 +1,8 @@
 package gin_server
 
 import (
+	"time"
+
 	"github.com/gin-gonic/gin"
 )
 
@@ -19,6 +21,9 @@ func InitGinServer() {
 	})
 
 	router.POST("/insert", func(c *gin.Context) {
+		// 等待5s后返回
+		time.Sleep(5 * time.Second)
+
 		// 获取请求体
 		body, err := c.GetRawData()
 		if err != nil {

@@ -17,7 +17,7 @@ func main() {
 
 	// TestRequestBaidu()
 
-	TestRequestGinServerGet()
+	// TestRequestGinServerGet()
 
 	TestRequestGinServerPost()
 	// 保持程序运行
@@ -25,10 +25,9 @@ func main() {
 }
 
 func TestRequestBaidu() {
-	req := shttp.NewHttpRequest(context.Background(), "http://www.baidu.com", "GET", nil)
-	resp, err := req.Do()
-	if err != nil {
-		fmt.Printf("req.Do error: %v", err)
+	resp := shttp.Get(context.Background(), "http://www.baidu.com", nil)
+	if resp.Err != nil {
+		fmt.Printf("req.Do error: %v", resp.Err)
 		return
 	}
 
@@ -43,10 +42,9 @@ func TestRequestBaidu() {
 }
 
 func TestRequestGinServerGet() {
-	req := shttp.NewHttpRequest(context.Background(), "http://localhost:7878/index", "GET", nil)
-	resp, err := req.Do()
-	if err != nil {
-		fmt.Printf("req.Do error: %v", err)
+	resp := shttp.Get(context.Background(), "http://localhost:7878/index", nil)
+	if resp.Err != nil {
+		fmt.Printf("req.Do error: %v", resp.Err)
 		return
 	}
 
@@ -63,19 +61,18 @@ func TestRequestGinServerGet() {
 func TestRequestGinServerPost() {
 	data := `{"name": "张三", "age": 18}`
 
-	req := shttp.NewHttpRequest(context.Background(), "http://localhost:7878/insert", "POST", []byte(data))
-	resp, err := req.Do()
+	resp := shttp.Post(
+		context.Background(), "http://localhost:7878/insert", []byte(data),
+		shttp.WithHTTPRetry(3),               // 配置重试options
+		shttp.WithHTTPTimeout(4*time.Second), // 配置超时options
+	)
+
+	respData, err := resp.ReadAll()
 	if err != nil {
 		fmt.Printf("req.Do error: %v", err)
 		return
 	}
 
-	fmt.Println("resp.StatusCode:", resp.StatusCode)
-	body, err := io.ReadAll(resp.Body)
-	if err != nil {
-		fmt.Printf("io.ReadAll error: %v", err)
-		return
-	}
-	fmt.Println("resp.Body:", string(body))
-	fmt.Println("resp.Header:", resp.Header)
+	fmt.Println("resp.Body:", string(respData))
+	fmt.Println("resp.Status:", resp.Status())
 }

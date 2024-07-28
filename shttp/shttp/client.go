@@ -3,6 +3,8 @@ package shttp
 import (
 	"bytes"
 	"context"
+	"errors"
+	"io"
 	"net"
 	"net/http"
 	"sync"
@@ -78,6 +80,7 @@ type HttpRequest struct {
 
 func NewHttpRequest(ctx context.Context, url, method string, body []byte, opts ...HttpOptionFunc) *HttpRequest {
 	httpOpts := newHttpOptions(opts...)
+
 	return &HttpRequest{
 		options: httpOpts,
 		ctx:     ctx,
@@ -87,22 +90,40 @@ func NewHttpRequest(ctx context.Context, url, method string, body []byte, opts .
 	}
 }
 
-func (req *HttpRequest) Do() (*http.Response, error) {
+func (req *HttpRequest) Do() *HTTPResponse {
 	return req.DoWithClient(DefaultNewClient())
 }
 
-func (req *HttpRequest) DoWithClient(c *Client) (*http.Response, error) {
+func (req *HttpRequest) DoWithClient(c *Client) *HTTPResponse {
+	res := req.do(c)
+	if res.Err == nil {
+		return res
+	}
+
+	for i := 0; i < req.options.Retry; i++ { // 重试
+		res.Close() // 关闭前一个Response
+
+		res = req.do(c)
+		if res.Err == nil {
+			return res
+		}
+	}
+
+	return res
+}
+
+func (req *HttpRequest) do(c *Client) *HTTPResponse {
 	request, err := req.BuildRequest()
 	if err != nil {
-		return nil, err
+		return NewHTTTPResponse(nil, req.cancelFn, err)
 	}
 
 	resp, err := c.Do(request)
 	if err != nil {
-		return nil, err
+		return NewHTTTPResponse(resp, req.cancelFn, err)
 	}
 
-	return resp, nil
+	return NewHTTTPResponse(resp, req.cancelFn, err)
 }
 
 func (req *HttpRequest) BuildRequest() (*http.Request, error) {
@@ -120,4 +141,98 @@ func (req *HttpRequest) BuildRequest() (*http.Request, error) {
 	}
 
 	return httpRequest, nil
+}
+
+func Post(ctx context.Context, url string, body []byte, opts ...HttpOptionFunc) *HTTPResponse {
+	return NewHttpRequest(ctx, url, http.MethodPost, body, opts...).Do()
+}
+
+func (c *Client) Post(ctx context.Context, url string, body []byte, opts ...HttpOptionFunc) *HTTPResponse {
+	return NewHttpRequest(ctx, url, http.MethodPost, body, opts...).DoWithClient(c)
+}
+
+func Get(ctx context.Context, url string, body []byte, opts ...HttpOptionFunc) *HTTPResponse {
+	return NewHttpRequest(ctx, url, http.MethodGet, body, opts...).Do()
+}
+
+func (c *Client) Get(ctx context.Context, url string, body []byte, opts ...HttpOptionFunc) *HTTPResponse {
+	return NewHttpRequest(ctx, url, http.MethodGet, body, opts...).DoWithClient(c)
+}
+
+type HTTPResponse struct {
+	*http.Response
+	cancelFn context.CancelFunc
+	Err      error
+}
+
+func NewHTTTPResponse(resp *http.Response, cancelFn context.CancelFunc, err error) *HTTPResponse {
+	res := &HTTPResponse{
+		Response: resp,
+		cancelFn: cancelFn,
+		Err:      err,
+	}
+
+	if err != nil {
+		cancelFn()
+	}
+
+	return res
+}
+
+func (res *HTTPResponse) ReadAll() ([]byte, error) {
+	if res.Err != nil {
+		return nil, res.Err
+	}
+
+	if res.Response == nil {
+		return nil, errors.New("res is nil")
+	}
+
+	if res.Response.Body == nil {
+		return nil, errors.New("body is nil")
+	}
+
+	defer func() {
+		res.Response.Body.Close()
+		res.Response.Body = nil
+	}()
+
+	body, err := io.ReadAll(res.Body)
+	if err != nil {
+		return body, err
+	}
+
+	return body, nil
+}
+
+func (res *HTTPResponse) Status() int {
+	if res.Response == nil {
+		return -1
+	}
+
+	return res.Response.StatusCode
+}
+
+// 关闭Body
+func (res *HTTPResponse) Close() {
+	if res.Response == nil {
+		return
+	}
+
+	if res.Response.Body == nil {
+		return
+	}
+
+	if res.cancelFn != nil {
+		defer res.cancelFn()
+	}
+
+	// 读完所有的数据，用于HTTP的连接重用
+	_, err := io.ReadAll(res.Response.Body)
+	if err != nil {
+		return
+	}
+
+	res.Response.Body.Close()
+	res.Response.Body = nil
 }

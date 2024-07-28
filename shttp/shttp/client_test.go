@@ -17,9 +17,9 @@ func TestNewClient(t *testing.T) {
 
 func TestNewHttRequest(t *testing.T) {
 	req := NewHttpRequest(context.Background(), "http://www.baidu.com", "GET", nil)
-	resp, err := req.Do()
-	if err != nil {
-		t.Error(err)
+	resp := req.Do()
+	if resp.Err != nil {
+		t.Error(resp.Err)
 	}
 
 	t.Log(resp)
