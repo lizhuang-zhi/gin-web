@@ -58,7 +58,7 @@ func addData() {
 
 func DeleteFunc() {
 	// 启动3个goroutine执行任务, 模拟分布式环境下的任务执行(可以简单理解为三个pod,同时执行相同的任务)
-	for i := 0; i < 10; i++ {
+	for i := 0; i < 3; i++ {
 		go task(i + 1)
 	}
 }
