@@ -2,6 +2,12 @@ package main
 
 import "math"
 
+/*
+	首先，我们需要定义两个核心要素：感知（Perception）和决策/行动（Decision/Action）。
+	感知负责收集并处理AI所需的信息。在我们的例子中，敌人AI需要知道两个关键信息：它自己的位置和玩家的位置。
+	决策/行动部分根据收集到的信息来决定AI应该做什么。在我们的例子中，AI有两个可能的行动：向玩家移动或攻击玩家。
+*/
+
 type Position struct {
 	X, Y float64
 }
