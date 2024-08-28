@@ -8,7 +8,10 @@ package main
 
 // Injectors from wire.go:
 
-func InitializeApp(messageService MessageService) (*App, error) {
+func InitializeApp(cfg *Config) (*App, error) {
+	emailService := ProvideEmailService(cfg)
+	weChatService := ProvideWeChatService(cfg)
+	messageService := ProvideMessageService(cfg, emailService, weChatService)
 	app := NewApp(messageService)
 	return app, nil
 }

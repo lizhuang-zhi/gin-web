@@ -7,6 +7,15 @@ type MessageService interface {
 }
 
 type EmailService struct {
+	username string
+	password string
+}
+
+func NewEmailService(username string, password string) *EmailService {
+	return &EmailService{
+		username: username,
+		password: password,
+	}
 }
 
 func (e *EmailService) Send(message string, receiver string) error {
@@ -15,6 +24,15 @@ func (e *EmailService) Send(message string, receiver string) error {
 }
 
 type WeChatService struct {
+	accountName     string
+	accountPassword string
+}
+
+func NewWeChatService(accountName string, accountPassword string) *WeChatService {
+	return &WeChatService{
+		accountName:     accountName,
+		accountPassword: accountPassword,
+	}
 }
 
 func (w *WeChatService) Send(message string, receiver string) error {
