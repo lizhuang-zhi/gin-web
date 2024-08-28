@@ -7,22 +7,23 @@ import (
 )
 
 func main() {
-	messageService := &EmailService{}
-	app, err := InitializeApp(messageService)
-	if err != nil {
-		log.Fatal(err)
+	cfg := &Config{
+		EmailUsername:         "myemail@example.com",
+		EmailPassword:         "mypassword",
+		WeChatAccountName:     "wechatAccount",
+		WeChatAccountPassword: "wechatPassword",
+		messageChoose:         "wechat", // 使用wechat作为message服务
 	}
 
-	messageService2 := &WeChatService{}
-	app2, err2 := InitializeApp(messageService2)
-	if err2 != nil {
+	app, err := InitializeApp(cfg)
+	if err != nil {
 		log.Fatal(err)
 	}
 
 	// 使用Gin
 	r := gin.Default()
 	r.GET("/ping", func(c *gin.Context) {
-		err := app.Notify("Ping received", "user@example.com")
+		err := app.Notify("wechat service", "leoli")
 		if err != nil {
 			c.JSON(500, gin.H{"message": err.Error()})
 		} else {
@@ -30,13 +31,5 @@ func main() {
 		}
 	})
 
-	r.GET("/ping2", func(c *gin.Context) {
-		err := app2.Notify("Ping 2 received", "leo li")
-		if err != nil {
-			c.JSON(500, gin.H{"message": err.Error()})
-		} else {
-			c.JSON(200, gin.H{"message": "pong"})
-		}
-	})
 	r.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 }

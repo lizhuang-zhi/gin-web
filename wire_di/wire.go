@@ -7,7 +7,7 @@ import (
 	"github.com/google/wire"
 )
 
-func InitializeApp(messageService MessageService) (*App, error) {
-	wire.Build(NewApp)
+func InitializeApp(cfg *Config) (*App, error) {
+	wire.Build(ProvideEmailService, ProvideWeChatService, ProvideMessageService, NewApp)
 	return &App{}, nil
 }
