@@ -1,0 +1,33 @@
+version: '3.8'
+services:
+  redis:
+    image: "redis:alpine"
+    ports:
+      - "6379:6379"
+
+  service-node-1:
+    build:
+      context: .
+      dockerfile: node/Dockerfile
+    depends_on:
+      - redis
+    ports:
+      - "8861:8860"
+
+  service-node-2:
+    build:
+      context: .
+      dockerfile: node/Dockerfile
+    depends_on:
+      - redis
+    ports:
+      - "8862:8860"
+
+  service-node-3:
+    build:
+      context: .
+      dockerfile: node/Dockerfile
+    depends_on:
+      - redis
+    ports:
+      - "8863:8860"
