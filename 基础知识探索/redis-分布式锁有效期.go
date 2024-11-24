@@ -13,7 +13,6 @@ import (
 // 模拟业务处理函数
 func processBusinessLogic() {
 	time.Sleep(5 * time.Second) // 模拟耗时操作
-	panic("unexpected error occurred!")
 }
 
 // 获取分布式锁
@@ -65,8 +64,6 @@ func handleBusiness(ctx context.Context, rdb *redis.Client, workerId int) {
 
 	log.Printf("Worker %d 成功获取锁\n", workerId)
 
-	// 直接执行业务逻辑，不使用defer释放锁
-	// 这样当panic发生时，锁将无法被释放
 	processBusinessLogic()
 
 	// 以下代码由于panic的发生将永远不会执行
