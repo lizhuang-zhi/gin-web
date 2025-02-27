@@ -1,8 +1,8 @@
 module booking-app
 
-go 1.22
+go 1.23
 
-toolchain go1.22.5
+toolchain go1.23.6
 
 require (
 	github.com/gorilla/websocket v1.5.0
@@ -37,6 +37,7 @@ require (
 	github.com/goccy/go-json v0.10.2 // indirect
 	github.com/golang/snappy v0.0.4 // indirect
 	github.com/gomodule/redigo v2.0.0+incompatible // indirect
+	github.com/google/uuid v1.6.0 // indirect
 	github.com/hashicorp/consul/api v1.29.1 // indirect
 	github.com/hashicorp/errwrap v1.1.0 // indirect
 	github.com/hashicorp/go-cleanhttp v0.5.2 // indirect
@@ -53,6 +54,7 @@ require (
 	github.com/larksuite/project-oapi-sdk-golang v1.0.4 // indirect
 	github.com/leodido/go-urn v1.4.0 // indirect
 	github.com/magiconair/properties v1.8.7 // indirect
+	github.com/mark3labs/mcp-go v0.8.5 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/matttproud/golang_protobuf_extensions/v2 v2.0.0 // indirect
