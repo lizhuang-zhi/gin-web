@@ -15,6 +15,7 @@ func main() {
 		Addr:     "localhost:6379", // Redis 地址
 		Password: "",               // 密码
 		DB:       0,                // 数据库
+		PoolSize: 100,              // 连接池大小
 	})
 
 	ctx := context.Background()
@@ -37,7 +38,7 @@ func main() {
 	}
 
 	// 保持主线程运行
-	time.Sleep(10 * time.Second)
+	time.Sleep(3 * time.Second)
 }
 
 // 使用 WATCH 实现库存扣减
