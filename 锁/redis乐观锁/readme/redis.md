@@ -9,4 +9,4 @@ rdb := redis.NewClient(&redis.Options{
 })
 ```
 
-![redis建立连接流程图](../redis/redis建立连接流程图.png)
+![redis建立连接流程图](./redis建立连接流程图.png)
