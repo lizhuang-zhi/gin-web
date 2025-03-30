@@ -9,9 +9,9 @@ import (
 )
 
 const (
-	totalTeams    = 25 // 共25组队伍
-	feedPerUser   = 20 // 每人投喂20次
-	redisPoolSize = 50 // Redis连接池大小
+	totalTeams    = 3  // 共3组队伍
+	feedPerUser   = 4  // 每人投喂4次
+	redisPoolSize = 10 // Redis连接池大小
 )
 
 var (
