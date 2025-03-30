@@ -42,6 +42,13 @@ func main() {
 }
 
 // 使用 WATCH 实现库存扣减
+/*
+	这里一共包含6次IO操作
+	1.WATCH命令
+	2.GET命令
+	3.事务执行（包含MULTI、DECR、EXEC命令），这里包含3次IO操作
+	4.UNWATCH命令
+*/
 func deductStock(ctx context.Context, rdb *redis.Client, routineID int) bool {
 	const maxRetries = 3 // 最大重试次数
 	key := "product_stock"
